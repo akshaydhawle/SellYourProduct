@@ -1,50 +1,68 @@
-import React from 'react';
-import { View, Image, StyleSheet } from 'react-native';
-import AppText from '../components/AppText/AppText';
-import colors from '../config/colors';
-import ListItem from "../components/ListItem";
+import React from "react";
+import {
+    View,
+    StyleSheet,
+    KeyboardAvoidingView,
+    Platform,
+} from "react-native";
+import { Image } from "react-native-expo-image-cache";
 
-const ListingDetailsScreen = ({ route }) => {
+import colors from "../config/colors";
+import ContactSellerForm from "../components/ContactSellerForm";
+import ListItem from "../components/ListItem";
+import Text from "../components/AppText/AppText";
+
+function ListingDetailsScreen({ route }) {
     const listing = route.params;
+
     return (
-        <View>
-            <Image style={styles.image} source={listing.image} />
+        <KeyboardAvoidingView
+            behavior="position"
+            keyboardVerticalOffset={Platform.OS === "ios" ? 0 : 100}
+        >
+            <Image
+                style={styles.image}
+                preview={{ uri: listing.images[0].thumbnailUrl }}
+                tint="light"
+                uri={listing.images[0].url}
+            />
             <View style={styles.detailsContainer}>
-                <AppText style={styles.title}>{listing.title}</AppText>
-                <AppText style={styles.price} >{listing.price}</AppText>
+                <Text style={styles.title}>{listing.title}</Text>
+                <Text style={styles.price}>${listing.price}</Text>
                 <View style={styles.userContainer}>
                     <ListItem
-                        image={require("../assets/1.jpg")}
-                        title="Akshay Dhawle"
+                        image={require("../assets/jacket.jpg")}
+                        title="Mosh Hamedani"
                         subTitle="5 Listings"
                     />
                 </View>
+                <ContactSellerForm listing={listing} />
             </View>
-        </View>
+        </KeyboardAvoidingView>
     );
 }
 
 const styles = StyleSheet.create({
     detailsContainer: {
-        padding: 20
+        padding: 20,
     },
     image: {
         width: "100%",
-        height: 300
+        height: 300,
     },
     price: {
         color: colors.secondary,
         fontWeight: "bold",
         fontSize: 20,
-        marginVertical: 10
+        marginVertical: 10,
     },
     title: {
         fontSize: 24,
-        fontWeight: "500"
+        fontWeight: "500",
     },
     userContainer: {
-        marginVertical: 20
-    }
-})
+        marginVertical: 40,
+    },
+});
 
 export default ListingDetailsScreen;

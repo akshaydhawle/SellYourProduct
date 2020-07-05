@@ -1,9 +1,12 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { FlatList, StyleSheet, View } from 'react-native';
 import ListItem from '../components/ListItem';
 import AppScreen from '../components/AppScreen';
 import ListItemSeparator from '../components/ListItemSeparator';
 import ListItemDeleteAction from '../components/ListItemDeleteAction';
+import messagesApi from "../api/messages";
+import useApi from '../hooks/useApi';
+
 
 const initialMessages = [
     {
@@ -36,6 +39,17 @@ const initialMessages = [
 const MessagesScreen = () => {
     const [messages, setMessages] = useState(initialMessages);
     const [refreshing, setRefreshing] = useState(false);
+
+    useEffect(() => {
+        getMessages();
+    }, []);
+
+    const getMessages = async () => {
+        const messages = await messagesApi.getMessages();
+        setMessages(messages);
+    }
+
+
 
     const handleDelete = message => {
         setMessages(messages.filter(m => m.id !== message.id));

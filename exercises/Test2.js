@@ -87,3 +87,6 @@ const getFiles = require('./Test')
 console.log(getFiles());
 
 
+import getFiles from "./Test";
+
+

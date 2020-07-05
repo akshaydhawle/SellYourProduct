@@ -9,7 +9,7 @@
     "splash": {
       "image": "./app/assets/splash.png",
       "resizeMode": "contain",
-      "backgroundColor": "#ffffff"
+      "backgroundColor": "#e63c4"
     },
     "updates": {
       "fallbackToCacheTimeout": 0
@@ -18,6 +18,9 @@
     "ios": {
       "supportsTablet": true
     },
-    "description": ""
+    "description": "",
+    "notification": {
+      "iosDisplayInForeground": true
+    }
   }
 }

@@ -1,16 +1,19 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
-import ListingsScreen from "../screens/ListingsScreen";
 import ListingEditScreen from "../screens/ListingEditScreen";
-import AccountScreen from "../screens/AccountScreen";
 import FeedNavigator from './FeedNavigator';
 import AccountNavigator from './AccountNavigator';
 import { MaterialCommunityIcons } from '@expo/vector-icons';
 import NewListingButton from './NewListingButton';
+import useNotifications from '../hooks/useNotifications';
+
 
 const Tab = createBottomTabNavigator();
 
 const AppNavigator = () => {
+
+    useNotifications();
+
     return (
         <Tab.Navigator>
             <Tab.Screen name="Feed" component={FeedNavigator}
